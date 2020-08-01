@@ -30,9 +30,11 @@ public class RaceManager {
         for(Player player: Bukkit.getOnlinePlayers()){
             player.setWalkSpeed(0.05f);
             World world = player.getWorld();
-            Location start = new Location(world,67 - playerNum*2,106,155);
+            //Location start = new Location(world,67 - playerNum*2,106,155);
+            Location start = new Location(world,-93 ,102,28 - playerNum*2);
             playerRespawns.put(player.getEntityId(),start);
             Entity entity = world.spawnEntity(start, EntityType.BOAT);
+            player.teleport(start);
             Vehicle boat = (Vehicle) entity;
             boat.addPassenger(player);
             this.players.add(player);
