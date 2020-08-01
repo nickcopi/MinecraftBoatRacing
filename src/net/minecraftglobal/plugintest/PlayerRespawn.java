@@ -9,6 +9,7 @@ import org.bukkit.entity.Vehicle;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 
 public class PlayerRespawn implements Listener {
     private RaceManager raceManager;
@@ -16,7 +17,7 @@ public class PlayerRespawn implements Listener {
         this.raceManager = raceManager;
     }
     @EventHandler
-    public void onPlayerRespawn(PlayerMoveEvent event) {
+    public void onPlayerRespawn(PlayerRespawnEvent event) {
         if(!raceManager.isActive()) return;
         Player player = event.getPlayer();
         World world = player.getWorld();

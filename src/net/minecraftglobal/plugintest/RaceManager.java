@@ -1,9 +1,6 @@
 package net.minecraftglobal.plugintest;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -39,6 +36,7 @@ public class RaceManager {
             Vehicle boat = (Vehicle) entity;
             boat.addPassenger(player);
             this.players.add(player);
+            player.setGameMode(GameMode.ADVENTURE);
             playerNum++;
         }
         startTime = new Date();
@@ -50,8 +48,10 @@ public class RaceManager {
         RaceScore score = new RaceScore(player, new Date());
         this.scores.add(score);
         player.setWalkSpeed(0.2f);
+        player.setGameMode(GameMode.SPECTATOR);
         player.sendMessage(ChatColor.GREEN + "Finished with time " + score.getTime(this.startTime) + 's');
         if(this.players.size() == 0) this.end();
+
     }
     public void end(){
         this.active = false;
@@ -61,6 +61,14 @@ public class RaceManager {
             RaceScore score = this.scores.get(i);
             Bukkit.broadcastMessage(i+1 + " " + score.getPlayer().getName() + " with time " + score.getTime(this.startTime) + 's');
         }
+    }
+    public void resetPlayer(Player player){
+        World world = player.getWorld();
+        Location start = this.getPlayerRespawns().get(player.getEntityId());
+        player.sendMessage(start.toString());
+        Entity entity = world.spawnEntity(start, EntityType.BOAT);
+        Vehicle boat = (Vehicle) entity;
+        boat.addPassenger(player);
     }
 
     public boolean isActive() {

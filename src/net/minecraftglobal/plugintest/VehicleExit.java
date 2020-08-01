@@ -13,12 +13,8 @@ import org.bukkit.event.vehicle.VehicleExitEvent;
 
 public class VehicleExit implements Listener {
     private RaceManager raceManager;
-    private int resets;
-    //private boolean inReset;
     public VehicleExit(RaceManager raceManager){
         this.raceManager = raceManager;
-        this.resets = 0;
-        //this.inReset = false;
     }
 
     @EventHandler
@@ -39,20 +35,8 @@ public class VehicleExit implements Listener {
         if(!(event.getVehicle().getPassengers().get(0) instanceof Player)) return;
         Player player = (Player) event.getVehicle().getPassengers().get(0);
         player.sendMessage("Broke da whip");
-        this.resetPlayer(player);
+        this.raceManager.resetPlayer(player);
 
     }
-    private void resetPlayer(Player player){
-        if(this.resets > 10) return;
-        //this.inReset = true;
-        this.resets++;
-        World world = player.getWorld();
-        Location start = this.raceManager.getPlayerRespawns().get(player.getEntityId());
-        if(start == null) player.sendMessage("No bed spawn location???");
-        else player.sendMessage(start.toString());
-        Entity entity = world.spawnEntity(start, EntityType.BOAT);
-        Vehicle boat = (Vehicle) entity;
-        boat.addPassenger(player);
-        //this.inReset = false;
-    }
+
 }
