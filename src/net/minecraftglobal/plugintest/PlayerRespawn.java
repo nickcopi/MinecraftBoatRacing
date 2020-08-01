@@ -19,10 +19,6 @@ public class PlayerRespawn implements Listener {
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         if(!raceManager.isActive()) return;
-        Player player = event.getPlayer();
-        World world = player.getWorld();
-        Entity entity = world.spawnEntity(player.getLocation(), EntityType.BOAT);
-        Vehicle boat = (Vehicle) entity;
-        boat.addPassenger(player);
+        this.raceManager.resetPlayer(event.getPlayer());
     }
 }

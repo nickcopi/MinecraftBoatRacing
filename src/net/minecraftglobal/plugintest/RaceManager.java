@@ -36,7 +36,7 @@ public class RaceManager {
             Vehicle boat = (Vehicle) entity;
             boat.addPassenger(player);
             this.players.add(player);
-            player.setGameMode(GameMode.ADVENTURE);
+            player.setGameMode(GameMode.SURVIVAL);
             playerNum++;
         }
         startTime = new Date();

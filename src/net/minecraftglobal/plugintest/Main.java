@@ -18,6 +18,7 @@ public class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PlayerMove(this.raceManager),this);
         //this.getServer().getPluginManager().registerEvents(new PlayerRespawn(this.raceManager),this);
         this.getServer().getPluginManager().registerEvents(new VehicleExit(this.raceManager),this);
+        this.getServer().getPluginManager().registerEvents(new EntityDamage(this.raceManager),this);
     }
     @Override
     public void  onDisable(){
