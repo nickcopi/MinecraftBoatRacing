@@ -1,0 +1,11 @@
+main: net.minecraftglobal.plugintest.Main
+name: Test_Plugin
+version: 1.0.0
+author: Nick
+description: Plugs in
+api-version: 1.16
+commands:
+  hello:
+    description: Run a cool command
+  start:
+      description: Start race
