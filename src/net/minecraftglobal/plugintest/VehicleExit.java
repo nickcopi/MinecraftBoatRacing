@@ -34,7 +34,7 @@ public class VehicleExit implements Listener {
         if(event.getVehicle().getPassengers().size() == 0) return;
         if(!(event.getVehicle().getPassengers().get(0) instanceof Player)) return;
         Player player = (Player) event.getVehicle().getPassengers().get(0);
-        player.sendMessage("Broke da whip");
+        //player.sendMessage("Broke da whip");
         this.raceManager.resetPlayer(player);
 
     }

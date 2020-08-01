@@ -1,5 +1,6 @@
 package net.minecraftglobal.plugintest;
 
+import net.minecraft.server.v1_16_R1.EntityBoat;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -28,6 +29,7 @@ public class RaceManager {
         this.playerRespawns = new HashMap<Integer, Location>();
         int playerNum = 0;
         for(Player player: Bukkit.getOnlinePlayers()){
+            player.setHealth(20);
             player.setWalkSpeed(0.05f);
             World world = player.getWorld();
             //Location start = new Location(world,67 - playerNum*2,106,155);
@@ -50,6 +52,7 @@ public class RaceManager {
         RaceScore score = new RaceScore(player, new Date());
         this.scores.add(score);
         player.setWalkSpeed(0.2f);
+        this.removePlayerBoat(player);
         player.setGameMode(GameMode.SPECTATOR);
         player.sendMessage(ChatColor.GREEN + "Finished with time " + score.getTime(this.startTime) + 's');
         if(this.players.size() == 0) this.end();
@@ -67,11 +70,25 @@ public class RaceManager {
     public void resetPlayer(Player player){
         World world = player.getWorld();
         Location start = this.getPlayerRespawns().get(player.getEntityId());
-        player.sendMessage(start.toString());
+        //player.sendMessage(start.toString());
         Entity entity = world.spawnEntity(start, EntityType.BOAT);
         Vehicle boat = (Vehicle) entity;
         boat.addPassenger(player);
     }
+    public void removePlayerBoat(Player player){
+        Entity boat = player.getVehicle();
+        if(boat != null) {
+            boat.eject();
+            boat.remove();
+        }
+    }
+
+    /*private EntityType getBoatType(Player player){
+        switch(player.getEntityId() % 5){
+           // case 0:
+               // return EntityBoat.EnumBoatType.
+        }
+    }*/
 
     public boolean isActive() {
         return active;

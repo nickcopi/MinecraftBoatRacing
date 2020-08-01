@@ -23,6 +23,7 @@ public class EntityDamage implements Listener {
         }
         if(event.getFinalDamage() >= player.getHealth()){
             event.setCancelled(true);
+            this.raceManager.removePlayerBoat(player);
             player.setHealth(20);
             this.raceManager.resetPlayer(player);
         }
