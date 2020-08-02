@@ -12,6 +12,7 @@ public class EntityDamage implements Listener {
     }
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event){
+        if(!this.raceManager.isActive()) return;
         if(!(event.getEntity() instanceof Player)) return;
         Player player = (Player) event.getEntity();
         //player.sendMessage("Ow!");

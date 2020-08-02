@@ -32,8 +32,8 @@ public class RaceManager {
             player.setHealth(20);
             player.setWalkSpeed(0.05f);
             World world = player.getWorld();
-            //Location start = new Location(world,67 - playerNum*2,106,155);
-            Location start = new Location(world,-93 ,102,28 - playerNum*2);
+            Location start = new Location(world,67 - playerNum*2,106,155);
+            //Location start = new Location(world,-93 ,102,28 - playerNum*2);
             playerRespawns.put(player.getEntityId(),start);
             Entity entity = world.spawnEntity(start, EntityType.BOAT);
             player.teleport(start);
@@ -45,6 +45,12 @@ public class RaceManager {
         }
         startTime = new Date();
         return true;
+    }
+    public void removePlayer(Player player){
+        if(!this.players.contains(player)) return;
+        this.players.remove(player);
+        player.setWalkSpeed(0.2f);
+        if(this.players.size() == 0) this.end();
     }
     public void finishPlayer(Player player){
         if(!this.players.contains(player)) return;
