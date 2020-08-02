@@ -32,8 +32,13 @@ public class RaceManager {
             player.setHealth(20);
             player.setWalkSpeed(0.05f);
             World world = player.getWorld();
-            Location start = new Location(world,67 - playerNum*2,106,155);
-            //Location start = new Location(world,-93 ,102,28 - playerNum*2);
+            //Location start = new Location(world,67 - playerNum*2,106,155); //village
+            Location start = new Location(world,-93 ,102,28 - playerNum*2); //caves
+            //Location start = new Location(world,819 - playerNum*2 ,202, -21); //city
+            if(Config.raceStart != null)
+                start = Config.raceStart;
+            if(Config.raceAxisX) start.add(-(playerNum*2),0,0);
+            else start.add(0,0,-(playerNum*2));
             playerRespawns.put(player.getEntityId(),start);
             Entity entity = world.spawnEntity(start, EntityType.BOAT);
             player.teleport(start);

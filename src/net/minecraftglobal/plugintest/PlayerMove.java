@@ -25,5 +25,9 @@ public class PlayerMove implements Listener {
             raceManager.finishPlayer(player);
         if(under.getType().equals(Material.BLUE_ICE))
             this.raceManager.getPlayerRespawns().put(player.getEntityId(),underPlayer.add(0,1,0));
+        if(Config.deadlyBlocks.contains(under.getType())){
+            this.raceManager.removePlayerBoat(player);
+            this.raceManager.resetPlayer(player);
+        }
     }
 }

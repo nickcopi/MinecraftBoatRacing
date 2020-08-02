@@ -1,9 +1,12 @@
 package net.minecraftglobal.plugintest;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.world.WorldLoadEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -20,6 +23,8 @@ public class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new VehicleExit(this.raceManager),this);
         this.getServer().getPluginManager().registerEvents(new EntityDamage(this.raceManager),this);
         this.getServer().getPluginManager().registerEvents(new PlayerLeave(this.raceManager),this);
+        WorldLoad.logger = getLogger();
+        WorldLoad.loadConfig();
     }
     @Override
     public void  onDisable(){
