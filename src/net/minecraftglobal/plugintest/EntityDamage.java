@@ -16,13 +16,14 @@ public class EntityDamage implements Listener {
         if(!(event.getEntity() instanceof Player)) return;
         Player player = (Player) event.getEntity();
         //player.sendMessage("Ow!");
+
         if(event.getCause().equals(EntityDamageEvent.DamageCause.FIRE_TICK) ||
                 event.getCause().equals(EntityDamageEvent.DamageCause.LAVA) ||
                 event.getCause().equals(EntityDamageEvent.DamageCause.FIRE) ) {
             event.setCancelled(true);
             return;
         }
-        if(event.getFinalDamage() >= player.getHealth()){
+        if(event.getFinalDamage() >= player.getHealth() || event.getCause().equals(EntityDamageEvent.DamageCause.VOID)){
             event.setCancelled(true);
             this.raceManager.removePlayerBoat(player);
             player.setHealth(20);

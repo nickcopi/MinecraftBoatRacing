@@ -1,9 +1,6 @@
 package net.minecraftglobal.plugintest;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.craftbukkit.v1_16_R1.entity.CraftShulkerBullet;
@@ -24,6 +21,8 @@ public class WorldLoad {
 
     public static boolean loadConfig() {
         World world = Bukkit.getWorld("world");
+        world.setGameRule(GameRule.DO_MOB_SPAWNING,false);
+        world.setGameRule(GameRule.DO_FIRE_TICK,false);
         Block block = world.getBlockAt(1, 1, 1);
         logger.info(block.toString());
         if (!(block.getState() instanceof Chest)) {

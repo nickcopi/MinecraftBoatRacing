@@ -35,6 +35,7 @@ public class RaceManager {
             //Location start = new Location(world,67 - playerNum*2,106,155); //village
             Location start = new Location(world,-93 ,102,28 - playerNum*2); //caves
             //Location start = new Location(world,819 - playerNum*2 ,202, -21); //city
+            //Location start = new Location(world, -479 ,57, -143 - playerNum*2); //chandlers aids
             if(Config.raceStart != null)
                 start = Config.raceStart;
             if(Config.raceAxisX) start.add(-(playerNum*2),0,0);
@@ -79,6 +80,7 @@ public class RaceManager {
         }
     }
     public void resetPlayer(Player player){
+        if(!this.players.contains(player)) return;
         World world = player.getWorld();
         Location start = this.getPlayerRespawns().get(player.getEntityId());
         //player.sendMessage(start.toString());
